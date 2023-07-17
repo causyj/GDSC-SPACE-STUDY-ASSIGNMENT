@@ -1,15 +1,14 @@
-import { Diary } from '../../../interface/diary'
-import { DiaryCard } from './Card'
+import { Diary } from "../../../interface/diary";
+import { DiaryCard } from "./Card";
 
-export const DiaryViewer = ({ diary }: { diary: Diary[] }) => {
-    const isDiaryExsists = diary.length > 0
-
-    return (
+export const DiaryViewer = ({diary} : {diary : Diary[]}) => {
+    const isDaryExists = diary.length > 0
+    return(
         <>
-            {isDiaryExsists ? (
+            {isDaryExists ? (
                 <div className="flex flex-col overflow-y-auto gap-2 w-full max-h-96">
                     {diary.map((props) => {
-                        return <DiaryCard key={props.id} {...props} />
+                        return <DiaryCard key={props.id} {...props}/>
                     })}
                 </div>
             ) : (
@@ -17,4 +16,5 @@ export const DiaryViewer = ({ diary }: { diary: Diary[] }) => {
             )}
         </>
     )
-} 
+
+}

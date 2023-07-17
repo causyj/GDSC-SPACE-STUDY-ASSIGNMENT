@@ -1,16 +1,12 @@
 import { createContext, useContext, useState } from 'react'
 import { Diary } from '../interface/diary'
-import { localStorage } from '../utils/localstorage'
-import { DIARY_STORAGE_KEY } from '../constants'
 
 const DiaryValueContext = createContext<Diary[] | undefined>(undefined)
-//state props를 부모에서 자식으로 보낼때 any 대신 사용
 type DiaryUpdate = React.Dispatch<React.SetStateAction<Diary[]>>
 const DiaryUpdateContext = createContext<DiaryUpdate | undefined>(undefined)
 
-//children type
 const DiaryProvider = ({ children }: React.PropsWithChildren) => {
-    const [diaries, updateDiaries] = useState<Diary[]>(() => localStorage.get<Diary[]>(DIARY_STORAGE_KEY) ?? [])
+    const [diaries, updateDiaries] = useState<Diary[]>([])
     return (
         <DiaryValueContext.Provider value={diaries}>
             <DiaryUpdateContext.Provider value={updateDiaries}>{children}</DiaryUpdateContext.Provider>
