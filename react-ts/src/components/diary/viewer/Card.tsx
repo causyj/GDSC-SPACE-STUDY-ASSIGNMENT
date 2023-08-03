@@ -30,7 +30,7 @@ const icon = tw.style({
     borderWidth : 'border',
     borderColor : 'border-gray-100',
 })
-//대괄호로 객체르 접근
+//대괄호로 객체를 접근 <key, type>
 const emotionsEmoji : Record<Diary['emotion'],string> = {
     awesome: '😎',
     great: '😃',
@@ -74,4 +74,4 @@ export const DiaryCard = ({date, emotion, title, weather, id } : Omit<Diary, 'co
         </div>
     )
 
-}//flex flex-row gap-1s"
+}

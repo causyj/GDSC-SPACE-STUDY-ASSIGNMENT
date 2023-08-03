@@ -1,3 +1,5 @@
+
+//Diary 초기화
 export type Diary = {
     id: string
     date: Date

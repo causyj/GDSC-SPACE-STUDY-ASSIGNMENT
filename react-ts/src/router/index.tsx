@@ -5,6 +5,7 @@ import DiaryEmotionLinkPage from '../app/emotions/page'
 import DiaryEmotionPage from '../app/emotions/[emotion]/page'
 
 export type DiaryRouterPath = '/' | `/detail/${string}` | '/emotions' | `/emotions/${string}`
+
 const diaryRouter = createBrowserRouter([
     {
         path: '/',

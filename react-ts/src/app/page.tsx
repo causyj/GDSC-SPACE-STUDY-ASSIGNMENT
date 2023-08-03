@@ -7,7 +7,7 @@ import { tw, util} from '../styles';
 import { useDiaryValue } from "../provider/Diary";
 import { useStorageDiary } from "../hooks/useStorageDiary";
 
-
+//제목 input이랑 내용textArea css
 const diaryInput = tw.rotary({
     base:{
         padding : 'p-2',
@@ -36,13 +36,18 @@ const diaryInput = tw.rotary({
 })
 
 const DiaryWriter = () => {
+    /*state의 type을 지정할때 generics타입으로 지정해줌  https://velog.io/@jjburi/TypeScript-useState%EC%97%90%EC%84%9C-type-%EC%A7%80%EC%A0%95
+     when 상태가 null일 수도 있고 아닐 수도 있을때 || 상태의 타입이 까다로운 구조를 가진 객체/배열일 때
+    */
     const [title, setTitle] = useState<string>('')
     const [contents, setContents] = useState<string>('')
     const [emotion, setEmotion] = useState<Diary['emotion'] | undefined>()
     const [weather, setWeather] = useState<Diary['weather'] | undefined>()
-    const [isValid, setIsValid] = useState(false)
-    const titleRef = useRef<HTMLInputElement>(null)
+    
+    //DOM요소에 이름을 달아 직접 접근할 수 있음 like 'key' when state로만 해결할 수 없고 DOM을 반드시 직접 건드려야할 때(ex. 특정 input에 focus주기) https://chanhuiseok.github.io/posts/react-7/
+    const titleRef = useRef<HTMLInputElement>(null) 
     const { add } = useStorageDiary()
+    const [isValid, setIsValid] = useState(false) //왼쪽화면 일기 내용 다 입력되었는가?
     useEffect(() => {
         const isNotVailidDiary =
             emotion === undefined || weather === undefined || title.length<=2 || contents.length <=5
@@ -53,10 +58,10 @@ const DiaryWriter = () => {
     
     //일기 저장버튼을 눌렀을때 제목으로 focus 주려고
     useEffect(()=> {
-        titleRef.current?.focus()
+        titleRef.current?.focus() //
     },[])
 
-    
+    //e의 type을 any보단 React.ChangeEvent<> 사용 / chagneEvent 중에 사용할 이벤트와 일치하는 이벤트 선택 https://merrily-code.tistory.com/157
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
         setTitle(e.target.value)
     }
@@ -143,7 +148,7 @@ const DiaryWriter = () => {
                     type : 'button',
                 })}
                 onClick={handleDiarySave}
-                disabled={!isValid}
+                disabled={!isValid} // 버튼이 초록새이 되기 전까진 버튼이 비활성화되어있어야 하니까
                 >
                 {isValid ? '일기를 저장해 보야요' : '일기를 더 자세히 적어볼까요?'}
             </button>
