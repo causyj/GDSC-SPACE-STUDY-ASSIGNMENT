@@ -5,7 +5,7 @@ import { useDiaryUpdate } from '../provider/Diary'
 import { localStorage } from '../utils'
 
 const updateStorageDiary = (diary: Diary[]) => localStorage.set(DIARY_STORAGE_KEY, diary)
-export const useStorageDiray = () => {
+export const useStorageDiary = () => {
     const setDiary = useDiaryUpdate()
 
     const diaryActions = useMemo(

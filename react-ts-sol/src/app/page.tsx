@@ -4,7 +4,7 @@ import { Diary } from '../interface/diary'
 import { Link, List } from '../components/common'
 import { DiaryViewer } from '../components/diary'
 import { tw, util } from '../styles'
-import { useStorageDiray } from '../hooks/useStorageDiary'
+import { useStorageDiary } from '../hooks/useStorageDiary'
 
 const diaryInput = tw.rotary({
     base: {
@@ -51,7 +51,7 @@ const DiaryWriter = () => {
         titleRef.current?.focus()
     }, [])
 
-    const { add } = useStorageDiray()
+    const { add } = useStorageDiary()
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)

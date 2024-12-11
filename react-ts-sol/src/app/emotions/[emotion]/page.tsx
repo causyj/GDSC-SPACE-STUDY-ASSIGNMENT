@@ -6,7 +6,7 @@ import { EMOTION_DATA } from '../../../constants'
 import { useState } from 'react'
 import { util } from '../../../styles'
 import { dateFormat } from '../../../utils'
-import { useStorageDiray } from '../../../hooks/useStorageDiary'
+import { useStorageDiary } from '../../../hooks/useStorageDiary'
 
 const DiaryTable = ({
     diary,
@@ -23,9 +23,9 @@ const DiaryTable = ({
                 className="w-4 h-4 accent-gray-50"
                 onChange={({ target: { checked } }) => {
                     if (checked) {
-                        setRemoveSelected((selected) => [...(selected ?? []), diary.id])
+                        setRemoveSelected((selected) => [...selected, diary.id])
                     } else {
-                        setRemoveSelected((selected) => selected?.filter((id) => id !== diary.id))
+                        setRemoveSelected((selected) => selected.filter((id) => id !== diary.id))
                     }
                 }}
             />
@@ -51,8 +51,8 @@ export default function EmotionPage() {
     if (emotion === undefined) throw Error(`${emotion} is undefined`)
 
     const emotionDiary = useDiaryValue().filter((diary) => diary.emotion === emotion)
-    const isEmotionDiaryExsists = emotionDiary.length > 0
-    const { remove } = useStorageDiray()
+    const isEmotionDiaryExists = emotionDiary.length > 0
+    const { remove } = useStorageDiary()
     const [removeSelected, setRemoveSelected] = useState<string[]>([])
     const isRemoveSelected = removeSelected.length > 0
     const removeSelectedDiary = () => {
@@ -65,7 +65,7 @@ export default function EmotionPage() {
                 <h1 className="text-3xl font-medium">{EMOTION_DATA[emotion].description}</h1>
             </div>
 
-            {isEmotionDiaryExsists ? (
+            {isEmotionDiaryExists ? (
                 <>
                     {emotionDiary.map((diary) => (
                         <DiaryTable key={diary.id} diary={diary} setRemoveSelected={setRemoveSelected} />

@@ -4,7 +4,7 @@ import { Diary } from '../../../interface/diary'
 import { dateFormat } from '../../../utils'
 import { util } from '../../../styles'
 import { Link } from '../../../components/common'
-import { useStorageDiray } from '../../../hooks/useStorageDiary'
+import { useStorageDiary } from '../../../hooks/useStorageDiary'
 import { useEffect } from 'react'
 
 type DiaryDetailPageParams = {
@@ -18,7 +18,7 @@ export default function DiaryDetailPage() {
     if (diary === undefined) throw Error(`Diary ${id} not found`)
 
     const navigate = useNavigate()
-    const { remove, update } = useStorageDiray()
+    const { remove, update } = useStorageDiary()
     const removeDiary = () => {
         remove(id!)
         navigate('/')
